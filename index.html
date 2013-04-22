@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name = "viewport" content = "width = device-width, initial-scale = 1.0, user-scalable = no">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" >
+<link href="img/favicon.png" rel="shortcut icon" type="image/png" >
+<link href="img/favicon.png" rel="apple-touch-icon">
+<link href="images/startup.png" rel="apple-touch-startup-image">
+<title>Todos Somos Bogotá</title>
+<link rel="stylesheet" type="text/css" href="css/mobile.css">
+<script src="js/cordova-2.5.0.js" type="text/javascript"></script>
+<script src="js/jquery-1.9.1.js"type="text/javascript" ></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
+<script src="js/ajaxupload.js" type="text/javascript"></script>
+<script src="js/base64.js" type="text/javascript"></script>
+<script src="js/functions.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="page-container"> 
+  <!-- PAGE 1 :: LOGED OUT PAGE -->
+  <div data-role="page" id="logedout-page">
+    <div data-role="header">
+      <div data-role="header-left"></div>
+      <div data-role="header-middle"><img id="logo" src="img/main_logo@2x.png" width="120" /></div>
+      <div data-role="header-right"></div>
+    </div>
+    <div data-role="content">
+      <div class="center"><img id="howitworks" src="img/inicio@2x.png" width="320" ></div>
+          <div class="submit-btn"><a href="#!/login" onClick="openPage('login');">Iniciar sesión</a></div>
+          <div class="normal-btn"><a href="#!/register" onClick="openPage('register');">Crear Cuenta</a></div>
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2013 Todos los derechos reservados.</h4>
+    </div>
+  </div>
+  <!-- PAGE 2 :: HOME PAGE -->
+  <div data-role="page" id="home-page">
+    <div data-role="header">
+      <div data-role="header-left"></div>
+      <div data-role="header-middle"><a href="#!/home" onClick="openPage('home');"><img id="logo" src="img/main_logo@2x.png" width="120" /></a></div>
+      <div data-role="header-right"><a href="#!/logedout" onClick="logout(); openPage('logedout');"><img src="img/logout_btn@2x.png" width="30"></a></div>
+    </div>
+    <div data-role="content">
+      <div class="center"><img id="howitworks" src="img/inicio@2x.png" width="320" ></div>
+          <div class="submit-btn"><a href="#!/report" onClick="openPage('report');">Reportar</a></div>
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2013 Todos los derechos reservados.</h4>
+    </div>
+  </div>
+  <!-- PAGE 3 :: LOGIN PAGE -->
+  <div data-role="page" id="login-page">
+    <div data-role="header">
+      <div data-role="header-left"><img src="img/back_btn@2x.png" width="20"></div>
+      <div data-role="header-middle"><a href="#!/logedout" onClick="openPage('logedout');"><img id="logo" src="img/main_logo@2x.png" width="120" /></a></div>
+      <div data-role="header-right"><a href="#!/logedout" onClick="openPage('logedout');"><img src="img/mainmenu/inicio_btn@2x.png" width="30"></a></div>
+    </div>
+    <div data-role="content"> 
+      <!-- Contenido -->
+      <form id="login-form" class="log-form" action="login">
+        <div class="form-title">Iniciar sesión</div>
+        <div class="form-row">Email / Nombre de usuario</div>
+        <div class="form-row">
+          <input type="email" id="login-form-username" name="login-form-username">
+        </div>
+        <div class="form-row">Contraseña</div>
+        <div class="form-row">
+          <input type="password" id="login-form-password" name="login-form-password">
+        </div>
+        <div class="form-row center">
+          <input name="login-form-submit" type="submit" value="Iniciar Sesión" class="normal-btn">
+        </div>
+      </form>
+          <div class="normal-btn"><a href="#!/register" onClick="openPage('register');">Crear Cuenta</a></div>
+      <!-- Fin contenido --> 
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2013 Todos los derechos reservados.</h4>
+    </div>
+  </div>
+  <!-- PAGE 4 :: REGISTER PAGE -->
+  <div data-role="page" id="register-page">
+    <div data-role="header">
+      <div data-role="header-left"><img src="img/back_btn@2x.png" width="20"></div>
+      <div data-role="header-middle"><a href="#!/logedout" onClick="openPage('logedout');"><img id="logo" src="img/main_logo@2x.png" width="120" /></a></div>
+      <div data-role="header-right"><a href="#!/logedout" onClick="openPage('logedout');"><img src="img/mainmenu/inicio_btn@2x.png" width="30"></a></div>
+    </div>
+    <div data-role="content"> 
+      <!-- Contenido -->
+      <form id="register-form" class="log-form" action="register">
+        <div class="form-title">Crear una cuenta</div>
+        <div class="form-row">Nombre completo</div>
+        <div class="form-row">
+          <input type="text" id="register-form-name" name="register-form-name">
+        </div>
+        <div class="form-row">Email (será tu nombre de usuario)</div>
+        <div class="form-row">
+          <input type="email" id="register-form-email" name="register-form-email">
+        </div>
+        <div class="form-row">Fecha de nacimiento</div>
+        <div class="form-row">
+          <input type="date" id="register-form-birth" name="register-form-birth" min="1900-01-01" max="2012-01-12">
+        </div>
+        <div class="form-row">
+          <input type="radio" id="register-form-sex" name="register-form-sex" value="6">
+          Soy Hombre
+          <input type="radio" id="register-form-sex" name="register-form-sex" value="7">
+          Soy Mujer<br>
+        </div>
+        <div class="form-row center">
+          <input name="register-form-submit" type="submit" value="Crear mi cuenta">
+        </div>
+      </form>
+      <div class="btn">
+        <div class="btnIcon">
+          <div class="btnLabel"><a href="#!/logedout" onClick="openPage('logedout');">Volver al Inicio</a></div>
+        </div>
+      </div>
+      <!-- Fin contenido --> 
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2013 Todos los derechos reservados.</h4>
+    </div>
+  </div>
+  <!-- PAGE 5 :: REPORT PAGE -->
+  <div data-role="page" id="report-page">
+    <div data-role="header">
+      <div data-role="header-left"><img src="img/back_btn@2x.png" width="20"></div>
+      <div data-role="header-middle"><a href="#!/home" onClick="openPage('home');"><img id="logo" src="img/main_logo@2x.png" width="120" /></a></div>
+      <div data-role="header-right"><a href="#!/home" onClick="openPage('home');"><img src="img/mainmenu/inicio_btn@2x.png" width="30"></a><a href="#!/report" onClick="openPage('report');"><img src="img/mainmenu/report_btn@2x.png" width="30"></a><a href="#!/logedout" onClick="logout(); openPage('logedout');"><img src="img/logout_btn@2x.png" width="30"></a></div>
+    </div>
+    <div data-role="content"> 
+      <!-- Contenido -->
+      
+      <form id="loadimg-form" name="loadimg-form" action="loadimg" enctype="multipart/form-data">
+        <input name="uploadimage" id="uploadimage" type="file">
+        <div class="img-thumb">
+          <canvas id="canvasThumb" style="width:200px; height:150px;"></canvas>
+        </div>
+        <div class="form-row center">
+          <div id="status" class="status"></div>
+          <textarea name="loadimg-form-description" id="loadimg-form-description" cols="25" rows="5" default-text="Escribe acerca de tu reporte" class="tooltip">Escribe acerca de tu reporte</textarea>
+        </div>
+        <div class="form-row center">
+          <input name="uploadimg-btn" type="submit" value="Reportar" id="uploadimg-btn">
+        </div>
+      </form>
+      <!-- Fin contenido --> 
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2013 Todos los derechos reservados.</h4>
+    </div>
+  </div>
+  <!-- PAGE 6 :: CATEGORY PAGE -->
+  <div data-role="page" id="category-page">
+    <div data-role="header">
+      <div data-role="header-left"><img src="img/back_btn@2x.png" width="20"></div>
+      <div data-role="header-middle"><a href="#!/home" onClick="openPage('home');"><img id="logo" src="img/main_logo@2x.png" width="120" /></a></div>
+      <div data-role="header-right"><a href="#!/home" onClick="openPage('home');"><img src="img/mainmenu/inicio_btn@2x.png" width="30"></a><a href="#!/report" onClick="openPage('report');"><img src="img/mainmenu/report_btn@2x.png" width="30"></a><a href="#!/logedout" onClick="logout(); openPage('logedout');"><img src="img/logout_btn@2x.png" width="30"></a></div>
+    </div>
+    <div data-role="content"> 
+      <!-- Contenido -->
+      <div class="page-title">Selecciona la categoría de tu reporte:</div>
+      <div class="btn category">
+        <div class="btnIcon">
+          <div class="btnLabel" value="movilidad" valid="1">Reporte de Movilidad</div>
+        </div>
+      </div>
+      <div class="btn category">
+        <div class="btnIcon">
+          <div class="btnLabel" value="medioambiente" valid="2">Reporte de Medio ambiente</div>
+        </div>
+      </div>
+      <div class="btn category">
+        <div class="btnIcon">
+          <div class="btnLabel" value="seguridad" valid="3">Reporte de Seguridad</div>
+        </div>
+      </div>
+      <div class="btn category">
+        <div class="btnIcon">
+          <div class="btnLabel" value="recreacion" valid="4">Reporte de Recreación</div>
+        </div>
+      </div>
+      <div class="btn category">
+        <div class="btnIcon">
+          <div class="btnLabel" value="otro" valid="5">Otro reporte</div>
+        </div>
+      </div>
+      <!-- Fin contenido --> 
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2013 Todos los derechos reservados.</h4>
+    </div>
+  </div>
+  <!-- PAGE 7 :: REPORT MAP PAGE -->
+  <div data-role="page" id="reportmap-page">
+    <div data-role="header">
+      <div data-role="header-left"><img src="img/back_btn@2x.png" width="20"></div>
+      <div data-role="header-middle"><a href="#!/home" onClick="openPage('home');"><img id="logo" src="img/main_logo@2x.png" width="120" /></a></div>
+      <div data-role="header-right"><a href="#!/home" onClick="openPage('home');"><img src="img/mainmenu/inicio_btn@2x.png" width="30"></a><a href="#!/report" onClick="openPage('report');"><img src="img/mainmenu/report_btn@2x.png" width="30"></a><a href="#!/logedout" onClick="logout();"><img src="img/logout_btn@2x.png" width="30"></a></div>
+    </div>
+    <div data-role="content"> 
+      <!-- Contenido -->
+      <div class="page-title">Selecciona la ubicación de tu reporte:</div>
+      <div id="map-canvas"></div>
+      <div id="confirmpos-btn" class="submit-btn">Listo. Esta es mi posición.</div>
+      <!-- Fin contenido --> 
+    </div>
+    <div data-role="footer">
+      <h4>&copy; 2013 Todos los derechos reservados.</h4>
+    </div>
+  </div>
+</div>
+<div id="msg">
+  <div id="msg-label"></div>
+</div>
+<div id="username"></div>
+<script>
+</script>
+</body>
+</html>
