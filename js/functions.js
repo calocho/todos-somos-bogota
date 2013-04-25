@@ -167,6 +167,11 @@ function register() {
         }
     }
     
+    if($('#register-form-password').val() != $().val('#register-form-password-c')){
+        showMsg('Las contraseñas no coinciden.');
+        return false;
+    }
+    
     var birthDate = $('#register-form-birth').val();
     birthDate = birthDate.substr(8,2) + '/' + birthDate.substr(5,2) + '/' + birthDate.substr(0,4);
     
@@ -178,7 +183,7 @@ function register() {
            '&mail=' + $('#register-form-email').val() +
            '&name=' + $('#register-form-email').val() +
            '&field_fecha_nacimiento[und][0][value][date]=' + birthDate +
-           '&pass=' + '123456' +
+           '&pass=' + $('#register-form-password').val() +
            '&field_sexo[und][tid]=' + $("input[name='register-form-sex']:checked").val(),
            beforeSend: function () {
            
