@@ -167,7 +167,7 @@ function register() {
         }
     }
     
-    if($('#register-form-password').val() != $().val('#register-form-password-c')){
+    if($('#register-form-password').val() != $('#register-form-password-c').val()){
         showMsg('Las contraseñas no coinciden.');
         return false;
     }
